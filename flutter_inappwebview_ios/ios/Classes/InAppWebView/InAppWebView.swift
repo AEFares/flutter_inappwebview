@@ -490,7 +490,7 @@ public class InAppWebView: WKWebView, UIScrollViewDelegate, WKUIDelegate,
                     UIScrollView.ContentInsetAdjustmentBehavior.init(rawValue: settings.contentInsetAdjustmentBehavior)!
             }
             
-            allowsBackForwardNavigationGestures = settings.allowsBackForwardNavigationGestures
+            allowsBackForwardNavigationGestures = false
             let isRTL = UIView.userInterfaceLayoutDirection(for: self.semanticContentAttribute) == .rightToLeft
             if let gestureRecognizers = self.gestureRecognizers {
                 for recognizer in gestureRecognizers {
