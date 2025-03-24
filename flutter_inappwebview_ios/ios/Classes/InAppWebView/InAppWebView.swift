@@ -491,6 +491,16 @@ public class InAppWebView: WKWebView, UIScrollViewDelegate, WKUIDelegate,
             }
             
             allowsBackForwardNavigationGestures = settings.allowsBackForwardNavigationGestures
+            let isRTL = UIView.userInterfaceLayoutDirection(for: self.semanticContentAttribute) == .rightToLeft
+            if let gestureRecognizers = self.gestureRecognizers {
+                for recognizer in gestureRecognizers {
+                    if let edgePan = recognizer as? UIScreenEdgePanGestureRecognizer {
+                      // If in RTL mode, change the swipe gesture to start from the right edge
+                      edgePan.edges = isRTL ? .right : .left
+                    }
+                }
+            }
+          
             if #available(iOS 9.0, *) {
                 allowsLinkPreview = settings.allowsLinkPreview
                 if !settings.userAgent.isEmpty {
